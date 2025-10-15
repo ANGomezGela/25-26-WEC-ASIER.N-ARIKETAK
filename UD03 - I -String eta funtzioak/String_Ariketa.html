@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Objetos nativos. String</title>
+	</head>
+
+	<body>
+		<script>
+            var esaldia = "España se ha proclamado campeona del Eurobasket después de derrotar a Francia (88-76) en la gran final de Berlin";
+
+        //Zenbat letra ditu esaldia ?
+            alert ("La longitud de la cadena es: " + esaldia.length);
+		
+		//Zer karakter du 25. posizioak?
+			alert ("El caracter 25 de la cadena es: " + esaldia.charAt(25));
+
+		//Zein posiziotan dago lehenengo d letra? Eta azken d letra? Nola lortuko zenuke bigarren d letra ateratzea?
+			alert ("La primera aparición de la letra d en la cadena es: " + esaldia.indexOf("d"));
+
+			alert ("La ultima aparición de la letra d en la cadena es: " + esaldia.lastIndexOf("d"));
+
+			alert ("La segunda aparición de la letra d en la cadena es: " + esaldia.indexOf("d", (esaldia.indexOf("d") + 1)));
+
+		//Zer posizioan dago "Eurobasket" hitza?
+			alert ("Busca la posición 'Eurobasket' en la cadena: " + esaldia.search("Eurobasket"));
+
+		//Nola dakizu esaldian «Portugal» hitza existitzen den?
+			alert ("Busca la existencia 'Portugal' en la cadena, booleano: " + esaldia.includes("Portugal")); 
+
+		//Nola dakizu esaldia Berlin Hitzarekin hasten edo amaitzen den?
+			alert("Comprueba  si la cadena inicia con la palabra 'Berlin': " + esaldia.startsWith("Berlin"));
+
+			alert("Comprueba  si la cadena inicia con la palabra 'Berlin': " + esaldia.endsWith("Berlin"));
+
+		//Gehitu «2022ko irailaren 18an» esaldiari, eta gorde guztia aldagai batean.
+			alert ("Añadir a la cadena '2022ko irailaren 18an': \n"+ esaldia.concat(" 2022ko irailaren 18an"));
+
+			var esaldiOsoa = esaldia + " 2022ko irailaren 18an";
+       	 	alert("Añadir a la cadena '2022ko irailaren 18an': " + esaldiOsoa);
+
+		//Aurreko esalditik 26 eta 35 posizioen artean dauden letrak atera.
+			alert ("La cadena que hay entre el 25 y el 35 de la cadena es: " + esaldiOsoa.slice(26,35));
+
+		//Aurreko esalditik 40. posiziotik aurrera dauden letrak atera.
+			alert ("La cadena que hay apartir de la posición 40: " + esaldiOsoa.substring(39));
+        </script>
+    </body>
