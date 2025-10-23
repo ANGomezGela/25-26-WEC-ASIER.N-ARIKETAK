@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="eu">
+<head>
+  <meta charset="UTF-8">
+  <title>Ikasleen Prototipoa</title>
+</head>
+<body>
+  <h1>Ikasleen Prototipoa Probatu</h1>
+  <p>Kontsolan ikusiko duzu emaitza (F12 → Console).</p>
+
+  <script src="ikaslea.js"></script>
+  <script>
+    // Sortu bi ikasle
+    const ik1 = new Ikaslea("Ane", 21, 2);
+    const ik2 = new Ikaslea("Jon", 22, 1);
+
+    // Ezarri ikaskideak
+    ik1.setIkaskide(ik2);
+    ik2.setIkaskide(ik1);
+
+    // Probatu metodoak
+    alert(ik1.erakutsi());
+    alert(ik2.erakutsi());
+    console.log(ik1.erakutsi());
+    console.log(ik2.erakutsi());
+
+    // Aldatu datuak
+    ik1.setAdina(23);
+    ik2.setEspezialitateIzena("Anitzeko plataforma");
+
+    console.log("Aldaketaren ondoren:");
+    console.log(ik1.erakutsi());
+    console.log(ik2.erakutsi());
+  </script>
+</body>
+</html>
