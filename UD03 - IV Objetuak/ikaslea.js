@@ -21,12 +21,14 @@ Ikaslea.prototype.getAdina = function() {
 // get espezialitatea -> devuelve el nombre
 Ikaslea.prototype.getEspezialitatea = function() {
   switch (this.espezialitatea) {
+    case 1:
+      return "Sistemak";
     case 2:
       return "Web";
     case 3:
       return "Anitzeko plataforma";
     default:
-      return "Sistemak";
+      return "Ez dauka";
   }
 };
 
@@ -65,15 +67,17 @@ Ikaslea.prototype.setEspezialitatea = function(zenbakia) {
   }
 };
 
-// set espezialitateIzena (kate bat jasotzen du)
+// set espezialitateIzena (string bat jasotzen du)
 Ikaslea.prototype.setEspezialitateIzena = function(izena) {
   const s = String(izena).toLowerCase();
-  if (s.includes("web")) {
+  if (s == "sistemak") {
+    this.espezialitatea = 1;
+  } else if (s == "web") {
     this.espezialitatea = 2;
-  } else if (s.includes("anitzeko")) {
+  } else if (s == "anitzeko plataforma") {
     this.espezialitatea = 3;
   } else {
-    this.espezialitatea = 1;
+    console.log("Ez da aldatu, sartu den espezialitatea ez da aukera bat: Aukerak: sistemak, web, anitzeko plataforma");
   }
 };
 
@@ -91,8 +95,8 @@ Ikaslea.prototype.setIkaskide = function(ikaslea) {
 Ikaslea.prototype.erakutsi = function() {
   return (
     "Izena: " + this.getIzena() +
-    ", Adina: " + this.getAdina() +
-    ", Espezialitatea: " + this.getEspezialitatea() +
-    ", Ikaskidea: " + this.getIkaskideIzena()
+    "\nAdina: " + this.getAdina() +
+    "\nEspezialitatea: " + this.getEspezialitatea() +
+    "\nIkaskidea: " + this.getIkaskideIzena()
   );
 };

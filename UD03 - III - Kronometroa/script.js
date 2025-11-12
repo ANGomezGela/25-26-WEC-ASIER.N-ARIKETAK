@@ -1,64 +1,77 @@
-// ========== ERLOJUA (RELOJ ACTUAL) ==========
-function updateClock() {
-    const now = new Date();
-    const hours = now.getHours().toString().padStart(2, "0");
-    const minutes = now.getMinutes().toString().padStart(2, "0");
-    const seconds = now.getSeconds().toString().padStart(2, "0");
+// ========== RELOJ ACTUAL ==========
+function actualizarReloj() {
+    // Creamos un objeto Date con la hora actual
+    const ahora = new Date();
 
-    document.getElementById("clock").textContent = `${hours}:${minutes}:${seconds}`;
+    // Obtenemos horas, minutos y segundos y los convertimos a string con 2 dígitos
+    const horas = ahora.getHours().toString().padStart(2, "0");
+    const minutos = ahora.getMinutes().toString().padStart(2, "0");
+    const segundos = ahora.getSeconds().toString().padStart(2, "0");
+
+    // Mostramos la hora en el elemento con id "clock"
+    document.getElementById("clock").textContent = `${horas}:${minutos}:${segundos}`;
 }
 
-setInterval(updateClock, 1000);
-updateClock(); // inicializa de inmediato
+// Actualizamos el reloj cada segundo
+setInterval(actualizarReloj, 1000);
+// Inicializamos de inmediato para que no espere un segundo
+actualizarReloj();
 
 
-// ========== KRONOMETROA ==========
-let chronoInterval;
-let startTime;
-let elapsedTime = 0;
-let running = false;
+// ========== CRONÓMETRO ==========
+let intervaloCronometro;  // Guardará el setInterval del cronómetro
+let tiempoInicio;          // Momento en que se ha iniciado la sesión actual
+let tiempoAcumulado = 0;   // Tiempo total acumulado en sesiones anteriores
+let corriendo = false;     // Estado del cronómetro
 
-function formatTime(ms) {
-    const totalSeconds = Math.floor(ms / 1000);
-    const hours = Math.floor(totalSeconds / 3600).toString().padStart(2, "0");
-    const minutes = Math.floor((totalSeconds % 3600) / 60).toString().padStart(2, "0");
-    const seconds = (totalSeconds % 60).toString().padStart(2, "0");
-    return `${hours}:${minutes}:${seconds}`;
+// Convierte milisegundos a formato HH:MM:SS
+function formatearTiempo(ms) {
+    const horas = String(Math.floor(ms / (1000 * 60 * 60))).padStart(2, "0");
+    const minutos = String(Math.floor((ms / (1000 * 60)) % 60)).padStart(2, "0");
+    const segundos = String(Math.floor((ms / 1000) % 60)).padStart(2, "0");
+    return `${horas}:${minutos}:${segundos}`;
 }
 
-function updateChronometerDisplay() {
-    const now = Date.now();
-    const diff = now - startTime + elapsedTime;
-    document.getElementById("chronometer").textContent = formatTime(diff);
+// Actualiza la pantalla del cronómetro
+function actualizarCronometro() {
+    const ahora = Date.now();
+    // Diferencia = tiempo desde inicio de esta sesión + tiempo acumulado
+    const diferencia = ahora - tiempoInicio + tiempoAcumulado;
+    document.getElementById("chronometer").textContent = formatearTiempo(diferencia);
 }
 
-function startChronometer() {
-    if (!running) {
-        startTime = Date.now();
-        chronoInterval = setInterval(updateChronometerDisplay, 1000);
-        running = true;
+// Inicia el cronómetro
+function iniciarCronometro() {
+    if (!corriendo) {
+        tiempoInicio = Date.now();  // Guardamos el momento de inicio
+        intervaloCronometro = setInterval(actualizarCronometro, 1000);
+        corriendo = true;
     }
 }
 
-function stopChronometer() {
-    if (running) {
-        clearInterval(chronoInterval);
-        elapsedTime += Date.now() - startTime;
-        running = false;
+// Detiene el cronómetro
+function detenerCronometro() {
+    if (corriendo) {
+        clearInterval(intervaloCronometro);
+        // Guardamos el tiempo que ha corrido en esta sesión
+        tiempoAcumulado += Date.now() - tiempoInicio;
+        corriendo = false;
     }
 }
 
-function resetChronometer() {
-    clearInterval(chronoInterval);
+// Reinicia el cronómetro
+function reiniciarCronometro() {
+    clearInterval(intervaloCronometro);
     document.getElementById("chronometer").textContent = "00:00:00";
-    elapsedTime = 0;
-    running = false;
-    document.getElementById("marks").innerHTML = "";
+    tiempoAcumulado = 0; // Borramos el tiempo acumulado
+    corriendo = false;
+    document.getElementById("marks").innerHTML = ""; // Borramos marcas
 }
 
-function saveMark() {
-    const currentDisplay = document.getElementById("chronometer").textContent;
+// Guardar marca de tiempo
+function guardarMarca() {
+    const tiempoActual = document.getElementById("chronometer").textContent;
     const li = document.createElement("li");
-    li.textContent = currentDisplay;
+    li.textContent = tiempoActual;
     document.getElementById("marks").appendChild(li);
 }

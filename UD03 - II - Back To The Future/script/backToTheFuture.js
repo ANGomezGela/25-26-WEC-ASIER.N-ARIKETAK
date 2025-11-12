@@ -1,4 +1,4 @@
-window.addEventListener("load",inicio,true);
+window.addEventListener("load",inicio,true); // Que cuando este la pagina cargada empiece la funcion inicio
 
 function inicio(){
     document.getElementById("calcular").addEventListener("click", calcularFechas);
@@ -12,8 +12,8 @@ function calcularFechas(){
     };
 
     // Pasamos lo de los imputs a variables
-    let mesPresente = document.getElementById("presenteMes").value.toUpperCase();
-    let diaPresente = parseInt(document.getElementById("presenteDia").value);
+    let mesPresente = document.getElementById("presenteMes").value.toUpperCase(); //no lo hacemos int porque lo vamos a hacer despues 
+    let diaPresente = parseInt(document.getElementById("presenteDia").value); //Si se ponen letras en el input no pasa nada el parseint solo guarda los numeros pero el Nunber(tiraria error)
     let anoPresente = parseInt(document.getElementById("presenteAno").value);
     let horaPresente = parseInt(document.getElementById("presenteHora").value);
     let minutoPresente = parseInt(document.getElementById("presenteMinuto").value);
@@ -53,17 +53,16 @@ function calcularFechas(){
     }
 
     // Pasamos los milisegundos a segundos, minutos, horas, dias, años con el Math floor para que redondee todo hacia abajo
-    let segundosTotales = Math.abs(Math.floor(diferencia / 1000));
+    let ms = Math.abs(diferencia); // diferencia en milisegundos
 
-    let segundos = segundosTotales % 60;
-    let minutosTotales = Math.floor(segundosTotales / 60);
-    let minutos = minutosTotales % 60;
-    let horasTotales = Math.floor(minutosTotales / 60);
-    let horas = horasTotales % 24;
-    let diasTotales = Math.floor(horasTotales / 24);
+    let segundos = String(Math.floor(ms / 1000) % 60).padStart(2, "0");
+    let minutos = String(Math.floor(ms / (1000 * 60)) % 60).padStart(2, "0");
+    let horas   = String(Math.floor(ms / (1000 * 60 * 60)) % 24).padStart(2, "0");
+    let diasTotales = Math.floor(ms / (1000 * 60 * 60 * 24));
 
     let urteak = Math.floor(diasTotales / 365);
     let egunak = diasTotales % 365;
+
 
     // Creamos el mensaje 
     let mensaje = `Denbora-${direccion} ${urteak} urte, ${egunak} egun, ${horas} ordu, ${minutos} minutu eta ${segundos} segundo bidaiatuko duzu.`;

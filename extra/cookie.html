@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ejemplo completo: Cookies y Storage</title>
+</head>
+<body style="font-family: Arial; margin: 30px;">
+  <h2>🍪 Cookies vs localStorage vs sessionStorage</h2>
+
+  <input id="nombre" placeholder="Escribe tu nombre" style="padding:5px;">
+  <br><br>
+
+  <h3>1️⃣ Cookies</h3>
+  <button onclick="guardarCookie()">Guardar cookie</button>
+  <button onclick="leerCookie()">Leer cookie</button>
+  <button onclick="borrarCookie()">Borrar cookie</button>
+
+  <h3>2️⃣ localStorage</h3> <!--Se guarda aun que se cierre la pestaña-->
+  <button onclick="guardarLocal()">Guardar localStorage</button>
+  <button onclick="leerLocal()">Leer localStorage</button>
+  <button onclick="borrarLocal()">Borrar localStorage</button>
+
+  <h3>3️⃣ sessionStorage</h3> <!--Se borra cuando se cierra la pestaña-->
+  <button onclick="guardarSesion()">Guardar sessionStorage</button>
+  <button onclick="leerSesion()">Leer sessionStorage</button>
+  <button onclick="borrarSesion()">Borrar sessionStorage</button>
+
+  <script>
+    // ---------- COOKIES ----------
+    function guardarCookie() {
+      let valor = document.getElementById("nombre").value;
+      // Creamos cookie con expiración a 1 año
+      let fecha = new Date();
+      fecha.setFullYear(fecha.getFullYear() + 1);
+      document.cookie = "usuario=" + encodeURIComponent(valor) + "; expires=" + fecha.toUTCString() + "; path=/";
+      alert("🍪 Cookie guardada correctamente");
+    }
+
+    function leerCookie() {
+      if (document.cookie) {
+        alert("Cookies actuales: " + document.cookie);
+      } else {
+        alert("No hay cookies guardadas");
+      }
+    }
+
+    function borrarCookie() {
+      // Para borrar, se pone expiración pasada o max-age=0
+      document.cookie = "usuario=; max-age=0; path=/";
+      alert("🗑️ Cookie 'usuario' borrada");
+    }
+
+    // ---------- LOCAL STORAGE ----------
+    function guardarLocal() {
+      let valor = document.getElementById("nombre").value;
+      localStorage.setItem("usuario", valor);
+      alert("💾 Guardado en localStorage");
+    }
+
+    function leerLocal() {
+      let valor = localStorage.getItem("usuario");
+      if (valor) {
+        alert("Valor en localStorage: " + valor);
+      } else {
+        alert("No hay valor en localStorage");
+      }
+    }
+
+    function borrarLocal() {
+      localStorage.removeItem("usuario");
+      alert("🗑️ Dato eliminado de localStorage");
+    }
+
+    // ---------- SESSION STORAGE ----------
+    function guardarSesion() {
+      let valor = document.getElementById("nombre").value;
+      sessionStorage.setItem("usuario", valor);
+      alert("💡 Guardado en sessionStorage");
+    }
+
+    function leerSesion() {
+      let valor = sessionStorage.getItem("usuario");
+      if (valor) {
+        alert("Valor en sessionStorage: " + valor);
+      } else {
+        alert("No hay valor en sessionStorage");
+      }
+    }
+
+    function borrarSesion() {
+      sessionStorage.removeItem("usuario");
+      alert("🗑️ Dato eliminado de sessionStorage");
+    }
+  </script>
+</body>
+</html>

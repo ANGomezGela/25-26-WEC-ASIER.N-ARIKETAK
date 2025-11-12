@@ -3,15 +3,18 @@
 
     <head>
         <meta charset="UTF-8">
-        <title>REP_Trivial</title>
+        <title>REP_PRUEBAS</title>
     </head>
 
     <body>
+        <div id="laHora"></div>
         <script>
-            let a = 1;
-            
-            alert(a)
+            alert(document.cookie);
+            document.cookie = "usuario=pedrito";
+            alert(document.cookie);
+            document.cookie = "usuario=;";
         </script>
+
     </body>
 
 </html>

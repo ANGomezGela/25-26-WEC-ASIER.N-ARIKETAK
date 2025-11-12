@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Laboratorio DOM y BOM Completo</title>
+    <style>
+        body {
+            font-family: Arial;
+            padding: 20px;
+        }
+
+        input,
+        button {
+            margin: 5px;
+            padding: 5px;
+        }
+
+        #resultado,
+        #resultadoHTML {
+            margin-top: 10px;
+        }
+
+        .caja {
+            width: 150px;
+            height: 50px;
+            margin: 5px;
+            background-color: lightblue;
+            text-align: center;
+            line-height: 50px;
+        }
+
+        ul {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Laboratorio DOM y BOM Completo</h1>
+
+    <h2>Inputs y validaciones</h2>
+
+    <!-- Inputs originales (JS con addEventListener) -->
+    <input id="usuario" placeholder="Usuario JS">
+    <input id="password" type="password" placeholder="Password JS">
+    <button id="btnLogin">Entrar JS</button>
+    <div id="resultado"></div>
+
+    <!-- Inputs ejemplo HTML events -->
+    <input id="usuarioHTML" placeholder="Usuario HTML" onblur="validarUsuarioHTML()">
+    <input id="passwordHTML" type="password" placeholder="Password HTML" onfocus="vaciarPasswordHTML()"
+        onblur="validarPasswordHTML()">
+    <button onclick="loginHTML()">Entrar HTML</button>
+    <div id="resultadoHTML"></div>
+
+    <h2>Estilos dinámicos</h2>
+    <div id="caja" class="caja">Caja</div>
+    <button id="cambiarColor">Cambiar color</button>
+    <button id="agrandar">Agrandar caja</button>
+
+    <h2>Lista dinámica</h2>
+    <ul id="lista"></ul>
+    <button id="agregar">Agregar ítem</button>
+    <button id="eliminar">Eliminar último ítem</button>
+
+    <h2>Información ventana / pantalla</h2>
+    <div id="infoVentana"></div>
+
+    <script>
+        // ===================== Ejemplos HTML events =====================
+        function validarUsuarioHTML() {
+            const usuario = document.getElementById("usuarioHTML");
+            if (usuario.value.length < 3) alert("Usuario HTML demasiado corto");
+        }
+
+        function vaciarPasswordHTML() {
+            const password = document.getElementById("passwordHTML");
+            password.value = "";
+        }
+
+        function validarPasswordHTML() {
+            const password = document.getElementById("passwordHTML");
+            if (!/[a-zA-Z]/.test(password.value) || !/[0-9]/.test(password.value)) {
+                alert("Password HTML debe tener al menos una letra y un número");
+            }
+        }
+
+        function loginHTML() {
+            const usuario = document.getElementById("usuarioHTML").value;
+            const password = document.getElementById("passwordHTML").value;
+            document.getElementById("resultadoHTML").textContent = `Login HTML: ${usuario} / ${password}`;
+            alert(`Login HTML enviado!\nUsuario: ${usuario}`);
+        }
+
+        // ===================== DOM y BOM (JS) =====================
+
+        // Acceder a elementos
+        const usuario = document.getElementById("usuario");
+        const password = document.getElementById("password");
+        const btnLogin = document.getElementById("btnLogin");
+        const resultado = document.getElementById("resultado");
+        const caja = document.getElementById("caja");
+        const cambiarColor = document.getElementById("cambiarColor");
+        const agrandar = document.getElementById("agrandar");
+        const lista = document.getElementById("lista");
+        const agregar = document.getElementById("agregar");
+        const eliminar = document.getElementById("eliminar");
+        const infoVentana = document.getElementById("infoVentana");;
+
+        // ---------- Inputs y validaciones JS ----------
+        usuario.addEventListener("blur", () => {
+            if (usuario.value.length < 3) alert("Usuario JS demasiado corto");
+        });
+        password.addEventListener("focus", () => password.value = "");
+        password.addEventListener("blur", () => {
+            if (!/[a-zA-Z]/.test(password.value) || !/[0-9]/.test(password.value)) {
+                alert("Password JS debe tener al menos una letra y un número");
+            }
+        });
+        btnLogin.addEventListener("click", () => {
+            // Confirmación antes de enviar
+            const confirmar = confirm(`¿Deseas enviar el login para el usuario "${usuario.value}"?`);
+            if (confirmar) {
+                resultado.textContent = `Login JS: ${usuario.value} / ${password.value}`;
+                alert(`Login JS enviado!\nUsuario: ${usuario.value}`);
+                clearTimeout(aviso); // Cancelamos el aviso de 10s
+            } else {
+                alert("Envio cancelado por el usuario.");
+            }
+        });
+
+
+        // ---------- Estilos dinámicos ----------
+        cambiarColor.addEventListener("click", () => {
+            caja.style.backgroundColor = caja.style.backgroundColor === "lightblue" ? "lightgreen" : "lightblue";
+        });
+        agrandar.addEventListener("click", () => {
+            caja.style.width = parseInt(caja.style.width) + 20 + "px";
+            caja.style.height = parseInt(caja.style.height) + 10 + "px";
+        });
+
+        // ---------- Lista dinámica ----------
+        let contador = 1;
+        agregar.addEventListener("click", () => {
+            const li = document.createElement("li");
+            li.textContent = "Item " + contador++;
+            lista.appendChild(li);
+        });
+        eliminar.addEventListener("click", () => {
+            if (lista.lastChild) lista.lastChild.remove();
+        });
+
+        // ---------- Información ventana / pantalla (BOM) ----------
+        function actualizarInfoVentana() {
+            infoVentana.innerHTML = `
+        Ancho ventana: ${window.innerWidth}px<br>
+        Alto ventana: ${window.innerHeight}px<br>
+        Ancho pantalla: ${screen.width}px<br>
+        Alto pantalla: ${screen.height}px<br>
+        URL actual: ${window.location.href}<br>
+    `;
+        }
+        actualizarInfoVentana();
+        window.addEventListener("resize", actualizarInfoVentana);
+
+        // ---------- Temporizadores (BOM) ----------
+        let aviso = setTimeout(() => alert("¡No olvides el password!"), 10000);
+        btnLogin.addEventListener("click", () => clearTimeout(aviso));
+
+    </script>
+</body>
+
+</html>
