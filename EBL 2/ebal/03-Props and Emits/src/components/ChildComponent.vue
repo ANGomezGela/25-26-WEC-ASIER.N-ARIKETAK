@@ -24,6 +24,9 @@ function utzi() {
     <button id="b_utzi" @click="utzi">UTZI</button>
   </div>
 </template>
+
+
+
 <style scoped>
 #b_onartu {
   background-color: #42b983;

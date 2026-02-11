@@ -12,6 +12,8 @@ function handleUtzi() {
   aldiz_utzi.value++;
 }
 </script>
+
+
 <template>
   <h1>Aita Konponentea</h1>
   <h3>Ongi etorri aita konponentera!</h3>
@@ -23,6 +25,10 @@ function handleUtzi() {
     <p>Aldiz utzita: {{ aldiz_utzi }}</p>
   </div>
 </template>
+
+
+
+
 <style scoped>
 div {
   border: 2px solid #397459;

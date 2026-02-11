@@ -1,13 +1,13 @@
 <script setup>
-import AgeClassifier from './components/AgeClassifier.vue'
-import CounterLogger from './components/CounterLogger.vue'
-import UserLoader from './components/UserLoader.vue'
+import AgeClassifier from "./components/AgeClassifier.vue";
+import CounterLogger from "./components/CounterLogger.vue";
+import UserLoader from "./components/UserLoader.vue";
 </script>
 
 <template>
-  <AgeClassifier/>
-  <CounterLogger/>
-  <UserLoader/>
+  <AgeClassifier />
+  <CounterLogger />
+  <UserLoader />
 </template>
 
 <style scoped>
