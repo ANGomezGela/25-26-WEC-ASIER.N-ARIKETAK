@@ -19,8 +19,10 @@ watch(age, (newAge) => {
 <template>
     
   <h1>1-ATALA</h1>
-  <label>Sartu zure adina</label>
-  <input v-model="age" type="number" />
+  <br/>
+  <label for="adina">Sartu zure adina</label>
+  <br/>
+  <input id="adina" type="number" v-model="age"/>
   <br />
   <p>{{ erantzuna }}</p>
 

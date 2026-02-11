@@ -4,7 +4,7 @@ import { reactive, computed } from "vue";
 const film = reactive({
   tituloa: "",
   luzera: "",
-  zuzendaria: "",
+  zuzendaria: ""
 });
 
 const films = reactive([]);

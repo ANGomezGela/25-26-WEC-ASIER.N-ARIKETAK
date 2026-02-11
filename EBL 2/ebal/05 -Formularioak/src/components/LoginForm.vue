@@ -10,6 +10,7 @@ const isFormValid = computed(() => {
   return user.izena && user.pasahitza;
 });
 
+
 function handleSubmit() {
     console.log(user);
 }
@@ -29,6 +30,7 @@ function handleSubmit() {
     <button type="submit" :disabled="!isFormValid">Bidali</button>
   </form>
 </template>
+
 <style scoped>
 
 </style>

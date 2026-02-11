@@ -13,10 +13,10 @@ const emailError = ref(false);
 const bidalita = ref(false);
 
 function handleSubmit() {
-  izenaError .value = false;
-  abizenError .value = false;
-  emailError .value = false;
-  bidalita .value = false;
+  izenaError.value = false;
+  abizenError.value = false;
+  emailError.value = false;
+  bidalita.value = false;
 
   if (!user.name) {
     izenaError.value = true;
@@ -58,7 +58,7 @@ function handleSubmit() {
 
     <p v-show="bidalita">Datuak zuzen bidalita</p>
 
-    <button>Bidali</button>
+    <button type="submit">Bidali</button>
   </form>
 </template>
 <style scoped>
