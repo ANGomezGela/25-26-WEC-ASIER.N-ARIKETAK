@@ -11,6 +11,12 @@ export const useErrezetaStore = defineStore("errezeta", {
         deleteErrezeta(id) {
             const index = this.errezetak.findIndex(errezeta => errezeta.id === id);
             this.errezetak.splice(index, 1);
+        },
+        updateErrezeta(id, updatedErrezeta) {
+            const index = this.errezetak.findIndex(errezeta => errezeta.id == id);
+            if (index !== -1) {
+                this.errezetak[index] = updatedErrezeta;
+            }
         }
     }
 });
