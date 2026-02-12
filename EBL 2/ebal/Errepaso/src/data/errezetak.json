@@ -1,0 +1,22 @@
+[
+  {
+    "idAuthor": 1,
+    "id": 1,
+    "izena": "Arroza",
+    "mota": "lehenengo",
+    "zailtasuna": "erreza",
+    "denbora": 15,
+    "osagaiak": ["arroza", "olioa"],
+    "prozedura": ["jarri olioa", "egosi arroza"]
+  },
+  {
+    "idAuthor": 1,
+    "id": 2,
+    "izena": "Arroza 3 delicias",
+    "mota": "lehenengo",
+    "zailtasuna": "erreza",
+    "denbora": 15,
+    "osagaiak": ["arroza", "olioa"],
+    "prozedura": ["jarri olioa", "egosi arroza"]
+  }
+]

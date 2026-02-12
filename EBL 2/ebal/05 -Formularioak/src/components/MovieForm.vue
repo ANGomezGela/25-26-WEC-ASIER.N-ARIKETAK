@@ -70,5 +70,12 @@ function ezabatu(index) {
 <style scoped>
 table {
   border: solid white 1px;
+  width: 100%;
+  color: white;
+}
+th, td {
+  padding: 0.5rem;
+  text-align: left;
+  border: solid white 1px;
 }
 </style>
